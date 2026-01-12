@@ -13,10 +13,36 @@
     </header>
 
     <main>
-      <section class="hero">
+      <section class="hero" id="hero-section">
         <h1 id="hero-title">AI가 당신의 본성을 폭로합니다.</h1>
         <p class="subtitle">당신은 정의로운 바보입니까, 매력적인 악당입니까?<br>7개의 밸런스 게임으로 당신의 숨겨진 '코어 타입'을 분석하세요.</p>
-        <a href="#" class="cta-button">분석 시작하기</a>
+        <a href="#" class="cta-button" id="start-quiz-btn">분석 시작하기</a>
+      </section>
+
+      <section class="quiz-section hidden" id="quiz-section">
+        <h2 id="question-text"></h2>
+        <div class="options-container">
+          <button class="option-btn" id="option-a"></button>
+          <button class="option-btn" id="option-b"></button>
+        </div>
+        <div class="progress-bar-container">
+          <div class="progress-bar" id="quiz-progress"></div>
+        </div>
+      </section>
+
+      <section class="result-section hidden" id="result-section">
+        <h2>당신의 코어 타입은...</h2>
+        <h3 id="result-type"></h3>
+        <p id="result-description"></p>
+        <div class="result-details">
+            <p>희귀도: <span id="result-rarity"></span></p>
+            <p>궁합 점수: <span id="result-compatibility"></span></p>
+        </div>
+        <div class="share-options">
+            <button class="share-btn">결과 공유하기</button>
+            <button class="share-btn">친구와 궁합보기</button>
+        </div>
+        <a href="#" class="cta-button secondary" id="restart-quiz-btn">다시 하기</a>
       </section>
 
       <section class="core-types">
@@ -28,24 +54,6 @@
           <div class="type-card">우유부단한 유령</div>
           <div class="type-card">고독한 천재</div>
           <div class="type-card">열정적인 선동가</div>
-        </div>
-      </section>
-
-      <section class="how-it-works">
-        <div class="step">
-          <div class="step-number">1</div>
-          <h3>7개의 선택</h3>
-          <p>AI가 제시하는 딜레마 상황에서 당신의 선택을 증명하세요.</p>
-        </div>
-        <div class="step">
-          <div class="step-number">2</div>
-          <h3>AI의 분석</h3>
-          <p>당신의 선택들을 다각적으로 분석하여 핵심 본성을 추출합니다.</p>
-        </div>
-        <div class="step">
-          <div class="step-number">3</div>
-          <h3>코어 타입 확인</h3>
-          <p>희귀도와 상성 궁합 정보가 포함된 당신만의 코어 타입을 확인하세요.</p>
         </div>
       </section>
 
