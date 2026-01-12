@@ -1,60 +1,65 @@
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BaitLink - Master the Prank.</title>
+  <title>밸런스 게임 AI - 당신의 본성을 폭로합니다</title>
   <link href='/style.css' rel='stylesheet'>
 </head>
 <body>
-  <header class="main-header">
-    <div class="logo">BaitLink 🎣</div>
-  </header>
+  <div class="container">
+    <header class="main-header">
+      <div class="logo">Balance AI</div>
+    </header>
 
-  <main>
-    <section class="hero">
-      <h1>Own the Internet. Bait Your Friends.</h1>
-      <p class="subtitle">Design the perfect link preview. The destination is your secret. They'll never see it coming.</p>
-      
-      <div class="generator-box">
-        <div class="input-group">
-          <label for="real-url">Your Secret URL (e.g., a YouTube link)</label>
-          <input type="text" id="real-url" placeholder="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
+    <main>
+      <section class="hero">
+        <h1 id="hero-title">AI가 당신의 본성을 폭로합니다.</h1>
+        <p class="subtitle">당신은 정의로운 바보입니까, 매력적인 악당입니까?<br>7개의 밸런스 게임으로 당신의 숨겨진 '코어 타입'을 분석하세요.</p>
+        <a href="#" class="cta-button">분석 시작하기</a>
+      </section>
+
+      <section class="core-types">
+        <h2>당신은 어떤 타입입니까?</h2>
+        <div class="type-grid">
+          <div class="type-card">극단적 생존주의자</div>
+          <div class="type-card">매력적인 악당</div>
+          <div class="type-card">정의로운 바보</div>
+          <div class="type-card">우유부단한 유령</div>
+          <div class="type-card">고독한 천재</div>
+          <div class="type-card">열정적인 선동가</div>
         </div>
-        
-        <div class="input-group">
-          <label for="fake-title">The Bait Title</label>
-          <input type="text" id="fake-title" placeholder="BREAKING: Scientists Discover Unicorns">
+      </section>
+
+      <section class="how-it-works">
+        <div class="step">
+          <div class="step-number">1</div>
+          <h3>7개의 선택</h3>
+          <p>AI가 제시하는 딜레마 상황에서 당신의 선택을 증명하세요.</p>
         </div>
-
-        <div class="input-group">
-          <label for="fake-desc">The Bait Description</label>
-          <input type="text" id="fake-desc" placeholder="A new study published in Nature reveals startling evidence...">
+        <div class="step">
+          <div class="step-number">2</div>
+          <h3>AI의 분석</h3>
+          <p>당신의 선택들을 다각적으로 분석하여 핵심 본성을 추출합니다.</p>
         </div>
-
-        <div class="input-group">
-          <label for="fake-image">The Bait Image</label>
-          <button id="upload-btn">🖼️ Upload Custom Image</button>
+        <div class="step">
+          <div class="step-number">3</div>
+          <h3>코어 타입 확인</h3>
+          <p>희귀도와 상성 궁합 정보가 포함된 당신만의 코어 타입을 확인하세요.</p>
         </div>
+      </section>
 
-        <button id="generate-btn">Generate Your BaitLink</button>
-      </div>
-    </section>
+      <section class="premium-offer">
+        <h2>당신의 운명, 더 깊게 들여다보기</h2>
+        <p>월간 운세, 재물운, 연애운 등 더 상세한 정보가 담긴<br>AI 심층 분석 리포트를 유료로 만나보세요.</p>
+        <a href="#" class="cta-button secondary">상세 리포트 구매하기</a>
+      </section>
+    </main>
 
-    <section class="examples">
-      <h2>From This... To This.</h2>
-      <div class="example-images">
-        <img src="https://storage.googleapis.com/gemini-studio-assets/history/a05d6af7-e3d6-4e50-a937-299f24b21644" alt="A social media post preview showing a fake news article about unicorns.">
-        <span class="arrow">→</span>
-        <img src="https://storage.googleapis.com/gemini-studio-assets/history/95913227-6f81-49b8-b3f7-915b2e9effa0" alt="An image of Rick Astley, implying the link was a rickroll.">
-      </div>
-    </section>
-  </main>
-
-  <footer class="main-footer">
-    <p>Use responsibly. Or don't. We're not your mom.</p>
-  </footer>
-
+    <footer class="main-footer">
+      <p>&copy; 2026 Balance AI. 분석 결과는 재미로만 즐겨주세요.</p>
+    </footer>
+  </div>
   <script defer type="text/javascript" src="/main.js"></script>
 </body>
 </html>
