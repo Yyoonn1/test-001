@@ -3,14 +3,6 @@ const numbersContainer = document.querySelector('.numbers-container');
 const historyList = document.getElementById('history-list');
 
 const generationHistory = [];
-const elegantColors = [
-  '#2c3e50', // Midnight Blue
-  '#e74c3c', // Pomegranate
-  '#3498db', // Peter River
-  '#f1c40f', // Sunflower
-  '#8e44ad', // Wisteria
-  '#1abc9c'  // Turquoise
-];
 
 function updateHistoryView() {
   historyList.innerHTML = '';
@@ -39,11 +31,10 @@ generateBtn.addEventListener('click', () => {
   updateHistoryView();
 
   numbersContainer.innerHTML = ''; 
-  sortedNumbers.forEach((number, index) => {
+  sortedNumbers.forEach(number => {
     const numberElement = document.createElement('div');
     numberElement.classList.add('number');
     numberElement.textContent = number;
-    numberElement.style.backgroundColor = elegantColors[index % elegantColors.length];
     numbersContainer.appendChild(numberElement);
   });
 });
