@@ -8,10 +8,16 @@
 </head>
 <body>
   <div class="container">
-    <h1>Glyph Link</h1>
+    <div class="header">
+      <h1>Glyph Link</h1>
+      <span id="level-indicator">Level 1</span>
+    </div>
     <p id="game-status">Connect the matching pairs without crossing lines!</p>
     <canvas id="game-canvas"></canvas>
-    <button id="reset-btn">New Game</button>
+    <div class="buttons">
+      <button id="solve-btn">Show Solution</button>
+      <button id="reset-btn">Reset Level</button>
+    </div>
   </div>
   <script defer type="text/javascript" src="/main.js"></script>
 </body>
