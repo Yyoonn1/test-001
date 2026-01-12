@@ -3,22 +3,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const heroSection = document.getElementById('hero-section');
   const quizSection = document.getElementById('quiz-section');
   const resultSection = document.getElementById('result-section');
-
   const startQuizBtn = document.getElementById('start-quiz-btn');
   const questionText = document.getElementById('question-text');
   const optionABtn = document.getElementById('option-a');
   const optionBBtn = document.getElementById('option-b');
   const quizProgressBar = document.getElementById('quiz-progress');
-
   const resultTypeEl = document.getElementById('result-type');
   const resultDescriptionEl = document.getElementById('result-description');
   const resultRarityEl = document.getElementById('result-rarity');
   const resultCompatibilityEl = document.getElementById('result-compatibility');
-  const shareResultBtn = document.querySelector('.share-options .share-btn:nth-child(1)'); // First share button
-  const compareFriendBtn = document.querySelector('.share-options .share-btn:nth-child(2)'); // Second share button
+  const shareResultBtn = document.querySelector('.share-options .share-btn:nth-child(1)');
   const restartQuizBtn = document.getElementById('restart-quiz-btn');
-
-  // Modal Elements
   const typeModal = document.getElementById('type-modal');
   const modalCloseBtn = document.getElementById('modal-close-btn');
   const modalTypeName = document.getElementById('modal-type-name');
@@ -28,96 +23,64 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- Game State ---
   let currentQuestionIndex = 0;
-  let userChoices = []; // 'A' or 'B'
-  const TOTAL_QUESTIONS = 7;
+  let userChoices = [];
+  const TOTAL_QUESTIONS = 10;
 
-  // --- Data: Questions (Updated for Korean Teenagers) ---
+  // --- Data: Core Types (Expanded to 12) ---
+  const coreTypes = {
+    "RF": { name: "정의로운 바보", description: "옳고 그름에 대한 확고한 신념으로, 때로는 손해를 감수하는 순수한 영혼. 주변의 존경을 받지만 가끔 답답하게 보일 수 있습니다.", rarity: "10%" },
+    "IG": { name: "우유부단한 유령", description: "갈등을 피하려다 결정을 미루는 평화주의자. 모두에게 좋은 사람이 되려 하지만, 때론 존재감이 희미해집니다.", rarity: "15%" },
+    "SS": { name: "극단적 생존주의자", description: "어떤 상황에서도 자신의 이익을 최우선으로 하는 냉정한 현실주의자. 강한 생존 본능의 소유자입니다.", rarity: "10%" },
+    "CV": { name: "매력적인 악당", description: "타고난 카리스마로 사람들을 현혹하는 인물. 목표를 위해 수단을 가리지 않지만, 그 과정마저 매력적으로 포장합니다.", rarity: "5%" },
+    "LG": { name: "고독한 천재", description: "남들이 보지 못하는 것을 보는 비범한 재능의 소유자. 타인과의 공감대가 부족해 종종 외로움을 느낍니다.", rarity: "5%" },
+    "PA": { name: "열정적인 선동가", description: "불의를 참지 못하고, 강력한 신념으로 사람들을 움직이는 힘을 가졌습니다. 하지만 과도한 확신이 때로 독이 됩니다.", rarity: "5%" },
+    "AIGH": { name: "AI 생성형 인간", description: "최신 유행을 누구보다 빠르게 흡수하고 완벽하게 따라 합니다. 당신의 취향은 곧 알고리즘 그 자체입니다.", rarity: "12%" },
+    "HEP": { name: "극효율 플래너", description: "인생의 모든 것을 최적화하려는 효율성의 화신. 여행 계획부터 인간관계까지, 낭비란 없습니다.", rarity: "8%" },
+    "EHR": { name: "감정적 갬블러", description: "인생은 한 방! 짜릿한 감정의 롤러코스터를 즐기며, 때로는 위험한 드라마의 주인공이 되기를 자처합니다.", rarity: "10%" },
+    "SO": { name: "침묵의 관찰자", description: "모든 것을 알고 있지만, 결코 전면에 나서지 않는 그림자. 당신은 말없이 상황의 핵심을 꿰뚫어 봅니다.", rarity: "8%" },
+    "IFF": { name: "순진한 얼굴의 여우", description: "순수하고 무해해 보이는 외모 뒤에 날카로운 계산과 치밀한 계획을 숨기고 있는 반전의 소유자입니다.", rarity: "7%" },
+    "MA": { name: "밈 발굴단", description: "아무도 모르는 고대 밈이나 컬트 영상을 발굴하며 희열을 느낍니다. 당신의 유머는 시대를 너무 앞서갔거나, 혹은 너무 뒤쳐졌습니다.", rarity: "5%" }
+  };
+
+  // --- Data: Questions (Hyper-updated for 2024/2025) ---
   const questions = [
-    {
-      q: "친구들과 놀러 갔는데, 갑자기 '인생네컷' 찍자고 한다면?",
-      a: "귀찮아도 다 같이 찍는다 (친구들과의 추억이 중요)",
-      b: "어색해서 못 찍겠다 (난 그런 거 못 해...)"
-    },
-    {
-      q: "내 최애 아이돌이 사실은 '깻잎 논쟁' 옹호자다 vs. 내 최애 아이돌이 '민트초코' 평생 금지시켰다",
-      a: "깻잎 논쟁 옹호 (취향은 존중해야지)",
-      b: "민트초코 금지 (용서 못 할 죄악이다)"
-    },
-    {
-      q: "'탕후루' 10개 먹고 배 터지기 vs. '마라탕' 1단계로 10번 먹기",
-      a: "탕후루 10개 (달콤함은 포기 못 해)",
-      b: "마라탕 1단계 10번 (맵찔이지만 마라는 사랑)"
-    },
-    {
-      q: "친구가 갑자기 '어쩔티비'라고 시비를 건다면?",
-      a: "나도 '저쩔티비'로 받아친다 (기싸움은 지지 않아)",
-      b: "무시하고 갈 길 간다 (상대할 가치도 없음)"
-    },
-    {
-      q: "무인도에 단 하나만 가져갈 수 있다면?",
-      a: "무한 배터리 스마트폰 (심심하면 안 돼!)",
-      b: "만능 맥가이버 칼 (생존이 우선이다)"
-    },
-    {
-      q: "평생 '급식체'만 써야 한다면? (예: 반모방 어케 들어가냐)",
-      a: "쌉가능 (유행에 뒤쳐질 수 없지)",
-      b: "절대 불가 (내 언어를 지키겠어)"
-    },
-    {
-      q: "내 연애사가 '네이버 웹툰'에 연재된다면? (선택 불가)",
-      a: "개꿀잼 스토리로 웹툰 작가와 협의 (어차피 공개될 거라면 주인공은 나야나!)",
-      b: "제발 평범하게 살게 해줘 (내 사생활은 소중해...)"
-    }
+    { q: "친구가 갑자기 유행 지난 '~공주' 말투를 쓴다면?", a: "나도 바로 '~~왕자'로 받아쳐준다 (티키타카)", b: "정색하며 '그게 언젯적 거냐'고 묻는다 (유행 분석)" },
+    { q: "내 모든 일상이 '스토리'에 박제되기 vs 내 모든 '흑역사'가 '알고리즘 추천'에 뜨기", a: "스토리 박제 (사생활보단 현재의 관심이 중요)", b: "알고리즘 추천 (지나간 흑역사는 웃어넘길 수 있음)" },
+    { q: "평생 'AI 프로필 사진'만 프사로 쓰기 vs 평생 'AI 커버댄스 챌린지'만 하기", a: "AI 프사 쓰기 (보여지는 모습이 완벽하다면 OK)", b: "AI 커버댄스 하기 (과정에 참여하는 게 더 재밌음)" },
+    { q: "약과 할매니얼 디저트 평생 먹기 vs 탕후루 평생 먹기", a: "약과 (전통의 맛, 힙스터 감성)", b: "탕후루 (트렌드의 정점, 짜릿한 단맛)" },
+    { q: "팀플에서 조용한 빌런 되기 vs 시끄러운 트롤 되기", a: "조용한 빌런 (아무도 모르게 내 몫만 챙김)", b: "시끄러운 트롤 (의견은 내지만 결과는 책임 안 짐)" },
+    { q: "내 통장 잔고 실시간으로 전국민에게 공개 vs 내 스마트폰 검색 기록 실시간으로 전국민에게 공개", a: "통장 잔고 공개 (차라리 당당하게 가난을 증명)", b: "검색 기록 공개 (내 취향과 생각은 숨길 수 없음)" },
+    { q: "10년 전 유행했던 싸이월드 감성으로 SNS 다시 하기 vs 10년 뒤 유행할 메타버스 SNS 미리 하기", a: "싸이월드 감성 (이미 아는 맛, 편안함)", b: "메타버스 SNS (새로운 것, 앞서나가는 느낌)" },
+    { q: "내 최애 유튜버가 갑자기 '사과영상' 올림 vs 내 최애 유튜버가 갑자기 '뒷광고' 논란 터짐", a: "사과영상 (잘못은 인정하는 게 먼저)", b: "뒷광고 논란 (들키지만 않았다면 괜찮았을지도...)" },
+    { q: "모르는 사람이랑 '엘리베이터' 3시간 같이 타기 vs 모르는 사람이랑 '디코' 3시간 하기", a: "엘리베이터 (어색한 침묵이 차라리 편함)", b: "디코 (온라인에선 내가 인싸가 될 수 있음)" },
+    { q: "내 인생이 평점 1점짜리 '네이버 웹툰'으로 연재 vs 내 인생이 조회수 1짜리 '유튜브 브이로그'로 연재", a: "웹툰 연재 (욕이라도 먹는 게 무관심보단 나음)", b: "브이로그 연재 (나만의 기록, 소소한 삶의 가치)" }
   ];
 
-  // --- Data: Core Types (Adjusted for mapping) ---
-  const coreTypes = [
-    {
-      id: "righteous_fool",
-      name: "정의로운 바보",
-      description: "당신은 옳고 그름에 대한 확고한 신념을 가지고 있으며, 때로는 그 신념 때문에 손해를 감수하기도 합니다. 주변 사람들은 당신의 순수함과 정의감을 존경하지만, 가끔은 답답해하기도 합니다.",
-      rarity: "20%",
-      compatibility: { "정의로운 바보": "70%", "매력적인 악당": "30%", "극단적 생존주의자": "50%", "우유부단한 유령": "80%", "고독한 천재": "60%", "열정적인 선동가": "90%" }
-    },
-    {
-      id: "indecisive_ghost",
-      name: "우유부단한 유령",
-      description: "당신은 어떤 것도 확실하게 결정하지 못하고 주변의 눈치를 살피는 경향이 있습니다. 갈등을 피하고 싶어 하지만, 결국 아무것도 결정하지 못해 모두를 답답하게 만들 때가 많습니다. 존재감이 희미해지기도 합니다.",
-      rarity: "30%",
-      compatibility: { "정의로운 바보": "80%", "매력적인 악당": "40%", "극단적 생존주의자": "60%", "우유부단한 유령": "70%", "고독한 천재": "50%", "열정적인 선동가": "70%" }
-    },
-    {
-      id: "selfish_survivor",
-      name: "극단적 생존주의자",
-      description: "당신은 어떤 상황에서든 자신의 이익과 생존을 최우선으로 생각합니다. 냉정하고 현실적이며, 필요하다면 타인을 이용하는 것도 주저하지 않습니다. 겉으로는 차가워 보이지만, 누구보다도 강한 생존 본능을 가지고 있습니다.",
-      rarity: "25%",
-      compatibility: { "정의로운 바보": "50%", "매력적인 악당": "80%", "극단적 생존주의자": "60%", "우유부단한 유령": "60%", "고독한 천재": "70%", "열정적인 선동가": "40%" }
-    },
-    {
-      id: "charismatic_villain",
-      name: "매력적인 악당",
-      description: "당신은 타고난 카리스마와 뛰어난 언변으로 사람들을 현혹합니다. 자신의 목표를 위해서라면 수단과 방법을 가리지 않지만, 그 과정마저도 매력적으로 보이게 만드는 재주가 있습니다. 많은 사람이 당신을 따르지만, 그만큼 위험하기도 합니다.",
-      rarity: "15%",
-      compatibility: { "정의로운 바보": "30%", "매력적인 악당": "90%", "극단적 생존주의자": "80%", "우유부단한 유령": "40%", "고독한 천재": "70%", "열정적인 선동가": "60%" }
-    },
-    {
-      id: "lonely_genius",
-      name: "고독한 천재",
-      description: "당신은 남들이 보지 못하는 것을 보고, 남들이 생각지 못한 것을 생각해내는 비범한 능력을 가지고 있습니다. 하지만 그만큼 타인과의 공감대가 부족하고, 종종 외로움을 느끼기도 합니다. 당신의 천재성은 때로 빛이 나지만, 때로는 그림자처럼 당신을 덮칩니다.",
-      rarity: "8%",
-      compatibility: { "정의로운 바보": "60%", "매력적인 악당": "70%", "극단적 생존주의자": "70%", "우유부단한 유령": "50%", "고독한 천재": "80%", "열정적인 선동가": "50%" }
-    },
-    {
-      id: "passionate_agitator",
-      name: "열정적인 선동가",
-      description: "당신은 불의를 참지 못하며, 자신의 신념을 강력하게 주장하고 타인을 설득하는 데 능숙합니다. 당신의 열정은 사람들을 움직이는 힘이 있지만, 때로는 과도한 확신이 독이 되기도 합니다. 당신은 세상을 바꾸고 싶어 하지만, 그 방식이 모두에게 통용되지는 않습니다.",
-      rarity: "7%",
-      compatibility: { "정의로운 바보": "90%", "매력적인 악당": "60%", "극단적 생존주의자": "40%", "우유부단한 유령": "70%", "고독한 천재": "50%", "열정적인 선동가": "80%" }
-    }
+  // Point system for calculation
+  const typeScores = { "RF": 0, "IG": 0, "SS": 0, "CV": 0, "LG": 0, "PA": 0, "AIGH": 0, "HEP": 0, "EHR": 0, "SO": 0, "IFF": 0, "MA": 0 };
+  const answerMapping = [
+    { a: ["PA", "AIGH"], b: ["SO", "HEP"] }, // Q1
+    { a: ["EHR", "PA"], b: ["SS", "SO"] },   // Q2
+    { a: ["IFF", "CV"], b: ["AIGH", "PA"] }, // Q3
+    { a: ["AIGH", "EHR"], b: ["MA", "LG"] }, // Q4
+    { a: ["SS", "IFF"], b: ["CV", "PA"] },   // Q5
+    { a: ["EHR", "CV"], b: ["IG", "SS"] },   // Q6
+    { a: ["MA", "LG"], b: ["HEP", "AIGH"] }, // Q7
+    { a: ["RF", "IG"], b: ["SS", "CV"] },   // Q8
+    { a: ["SO", "LG"], b: ["AIGH", "PA"] }, // Q9
+    { a: ["EHR", "CV"], b: ["RF", "SO"] }    // Q10
   ];
 
   // --- Functions ---
 
+  function startQuiz() {
+    Object.keys(typeScores).forEach(key => typeScores[key] = 0);
+    currentQuestionIndex = 0;
+    userChoices = [];
+    showSection(quizSection);
+    loadQuestion();
+  }
+  
   function showSection(section) {
     heroSection.classList.add('hidden');
     quizSection.classList.add('hidden');
@@ -143,36 +106,27 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function handleAnswer(choice) {
-    userChoices.push(choice);
+    const mappings = answerMapping[currentQuestionIndex];
+    if (choice === 'A') {
+      mappings.a.forEach(type => typeScores[type]++);
+    } else { // 'B'
+      mappings.b.forEach(type => typeScores[type]++);
+    }
     currentQuestionIndex++;
     loadQuestion();
   }
 
   function calculateCoreType() {
-    let aCount = userChoices.filter(choice => choice === 'A').length;
-    let bCount = userChoices.filter(choice => choice === 'B').length; // Not directly used in this simple mapping but good to have
-
-    // Simplified mapping logic based on 'A' choices
-    let finalType;
-    if (aCount >= 6) {
-      finalType = coreTypes.find(type => type.id === "charismatic_villain");
-    } else if (aCount >= 4) {
-      finalType = coreTypes.find(type => type.id === "selfish_survivor");
-    } else if (aCount >= 2) {
-      finalType = coreTypes.find(type => type.id === "indecisive_ghost");
-    } else { // 0-1 A's
-      finalType = coreTypes.find(type => type.id === "righteous_fool");
+    let maxScore = -1;
+    let finalTypeCode = '';
+    for(const type in typeScores) {
+        if(typeScores[type] > maxScore) {
+            maxScore = typeScores[type];
+            finalTypeCode = type;
+        }
     }
-
-    // Add some randomness for lonely_genius or passionate_agitator if no strong match
-    if (!finalType || Math.random() < 0.2) { // 20% chance to assign rare types
-        const rareTypes = coreTypes.filter(type => type.id === "lonely_genius" || type.id === "passionate_agitator");
-        finalType = rareTypes[Math.floor(Math.random() * rareTypes.length)];
-    }
-    
-    // Ensure a type is always assigned
-    if (!finalType) finalType = coreTypes[Math.floor(Math.random() * coreTypes.length)];
-
+    // Simple tie-breaking: pick the first one found
+    const finalType = coreTypes[finalTypeCode];
     displayResult(finalType);
   }
 
@@ -180,58 +134,33 @@ document.addEventListener('DOMContentLoaded', () => {
     resultTypeEl.textContent = type.name;
     resultDescriptionEl.textContent = type.description;
     resultRarityEl.textContent = type.rarity;
-
-    // Display compatibility with a random other type for now, or a specific "rival"
-    const otherTypes = coreTypes.filter(t => t.name !== type.name);
-    const randomOtherType = otherTypes[Math.floor(Math.random() * otherTypes.length)];
-    const compatibilityScore = type.compatibility[randomOtherType.name];
-    resultCompatibilityEl.textContent = `${randomOtherType.name}과 ${compatibilityScore}`;
+    
+    // For now, just show a generic compatibility message.
+    resultCompatibilityEl.textContent = "친구와 궁합보기 기능 (프리미엄)";
     
     showSection(resultSection);
   }
 
   function restartQuiz() {
-    currentQuestionIndex = 0;
-    userChoices = [];
-    heroSection.classList.remove('hidden'); // Show hero again to restart the typing anim
+    // Hide all dynamic sections and show hero
     quizSection.classList.add('hidden');
     resultSection.classList.add('hidden');
+    heroSection.classList.remove('hidden');
     
-    // Restart typing animation
-    const titleElement = document.getElementById('hero-title');
-    const originalHeroText = "AI가 당신의 본성을 폭로합니다.";
-    titleElement.classList.remove('animation-done');
-    titleElement.innerText = '';
-    let heroTextIndexRestart = 0;
-    function typeWriterRestart() {
-      if (heroTextIndexRestart < originalHeroText.length) {
-        titleElement.innerHTML += originalHeroText.charAt(heroTextIndexRestart);
-        heroTextIndexRestart++;
-        setTimeout(typeWriterRestart, 100);
-      } else {
-        titleElement.classList.add('animation-done');
-      }
-    }
-    setTimeout(typeWriterRestart, 500);
+    // No need for typewriter restart, as the page is not reloaded.
+    // User can just click start again.
   }
 
   // --- Modal Functions ---
-  function openTypeModal(typeId) {
-    const type = coreTypes.find(t => t.id === typeId);
-    if (!type) return;
-
-    modalTypeName.textContent = type.name;
-    modalTypeDescription.textContent = type.description;
-    
-    modalCompatibilityChart.innerHTML = '<h4>다른 타입과의 궁합</h4>';
-    for (const otherTypeName in type.compatibility) {
-      const compatItem = document.createElement('div');
-      compatItem.classList.add('compat-item');
-      compatItem.textContent = `${otherTypeName}: ${type.compatibility[otherTypeName]}`;
-      modalCompatibilityChart.appendChild(compatItem);
-    }
-
-    typeModal.classList.remove('hidden');
+  function openTypeModal(typeName) {
+      const typeCode = Object.keys(coreTypes).find(key => coreTypes[key].name === typeName);
+      if(!typeCode) return;
+      
+      const type = coreTypes[typeCode];
+      modalTypeName.textContent = type.name;
+      modalTypeDescription.textContent = type.description;
+      modalCompatibilityChart.innerHTML = `<h4>희귀도: ${type.rarity}</h4>`;
+      typeModal.classList.remove('hidden');
   }
 
   function closeTypeModal() {
@@ -239,82 +168,39 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // --- Share Function ---
-  async function shareResult(type) {
-      const shareText = `내 코어 타입은 '${type.name}'이야! 🤯 "${type.description}"\n너의 타입은 뭐야? 여기서 확인해봐! ${window.location.href}`;
-      const shareData = {
-          title: '밸런스 게임 AI - 나의 코어 타입은?',
-          text: shareText,
-          url: window.location.href,
-      };
-
+  async function shareResult() {
+      const typeName = resultTypeEl.textContent;
+      const shareText = `내 코어 타입은 '${typeName}'이야! 🤯 너의 타입은 뭐야? 여기서 확인해봐! ${window.location.href}`;
+      
       try {
           if (navigator.share) {
-              await navigator.share(shareData);
-              console.log('Share successful');
+              await navigator.share({ title: '밸런스 게임 AI - 나의 코어 타입은?', text: shareText });
           } else {
               await navigator.clipboard.writeText(shareText);
               alert('결과가 클립보드에 복사되었습니다!');
-              console.log('Copied to clipboard');
           }
       } catch (err) {
           console.error('Share failed:', err);
+          alert('공유에 실패했습니다.');
       }
   }
 
-
   // --- Event Listeners ---
-  startQuizBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    currentQuestionIndex = 0;
-    userChoices = [];
-    showSection(quizSection);
-    loadQuestion();
-  });
-
+  startQuizBtn.addEventListener('click', (e) => { e.preventDefault(); startQuiz(); });
   optionABtn.addEventListener('click', () => handleAnswer('A'));
   optionBBtn.addEventListener('click', () => handleAnswer('B'));
   restartQuizBtn.addEventListener('click', restartQuiz);
-  
-  shareResultBtn.addEventListener('click', () => shareResult(coreTypes.find(t => t.name === resultTypeEl.textContent)));
-  // The 'compare friend' button can be hooked up to another function for premium/future use
-
+  shareResultBtn.addEventListener('click', shareResult);
   modalCloseBtn.addEventListener('click', closeTypeModal);
-  typeModal.addEventListener('click', (e) => {
-    if (e.target === typeModal) { // Close when clicking outside content
-      closeTypeModal();
-    }
-  });
-
+  typeModal.addEventListener('click', (e) => { if (e.target === typeModal) closeTypeModal(); });
   typeCards.forEach(card => {
     card.addEventListener('click', () => {
-      // Get the type name from the card's text content
-      const typeName = card.textContent.trim();
-      // Find the corresponding type ID
-      const type = coreTypes.find(t => t.name === typeName);
-      if (type) {
-        openTypeModal(type.id);
-      }
+      openTypeModal(card.textContent.trim());
     });
   });
 
-
-  // --- Initial Setup (Typewriter Effect) ---
+  // Remove typewriter effect as per new design
   const titleElement = document.getElementById('hero-title');
-  const originalHeroText = titleElement.innerText;
-  let heroTextIndex = 0;
-  
-  titleElement.innerText = '';
+  titleElement.classList.add('animation-done');
 
-  function typeWriterInitial() {
-    if (heroTextIndex < originalHeroText.length) {
-      titleElement.innerHTML += originalHeroText.charAt(heroTextIndex);
-      heroTextIndex++;
-      setTimeout(typeWriterInitial, 100); // Adjust typing speed here
-    } else {
-      titleElement.classList.add('animation-done');
-    }
-  }
-
-  // Start the initial typing animation after a short delay
-  setTimeout(typeWriterInitial, 500);
 });
