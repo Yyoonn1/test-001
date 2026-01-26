@@ -17,10 +17,12 @@ body.dark-mode {
 body {
     font-family: 'Arial', sans-serif;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 2rem;
     min-height: 100vh;
-    margin: 0;
+    margin: 2rem 0;
     background-color: var(--bg-color);
     color: var(--text-color);
     transition: background-color 0.3s, color 0.3s;
@@ -38,9 +40,49 @@ body {
     transition: background-color 0.3s, box-shadow 0.3s;
 }
 
-h1 {
+h1, h2 {
     color: var(--text-color);
     margin-bottom: 1.5rem;
+}
+
+.inquiry-container {
+    text-align: left;
+}
+
+.form-group {
+    margin-bottom: 1.2rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.form-group input, 
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: var(--container-bg);
+    color: var(--text-color);
+    box-sizing: border-box;
+}
+
+body.dark-mode .form-group input,
+body.dark-mode .form-group textarea {
+    border-color: #444;
+}
+
+.form-group textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+.inquiry-container button {
+    width: 100%;
 }
 
 .numbers-container {
