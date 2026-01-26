@@ -17,7 +17,31 @@
         <button id="generateBtn">이름 생성하기</button>
     </div>
 
+    <div class="container face-recognition-container">
+        <h2>🐶 강아지상 vs 고양이상 🐱</h2>
+        <p>사진을 업로드하거나 카메라로 촬영하여 어떤 상인지 테스트해보세요!</p>
 
+        <div class="camera-upload-area">
+            <input type="file" id="imageUpload" accept="image/*" style="display: none;">
+            <button id="uploadButton">사진 업로드</button>
+            <button id="cameraButton">카메라 열기</button>
+            <video id="webcam" autoplay playsinline style="display: none; width: 100%; max-width: 300px;"></video>
+            <canvas id="canvas" style="display: none;"></canvas>
+            <img id="uploadedImage" style="max-width: 100%; display: none;">
+            <button id="takePictureButton" style="display: none;">사진 찍기</button>
+        </div>
+
+        <button id="classifyButton" style="display: none;">분류하기</button>
+        <div id="label-container" class="classification-results">
+            <p class="placeholder">결과를 기다리는 중...</p>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
+    <!-- Important: Replace YOUR_TEACHABLE_MACHINE_MODEL_URL with your actual model URL -->
+    <!-- Example: https://teachablemachine.withgoogle.com/models/YOUR_MODEL_ID/ -->
     <script src="script.js"></script>
 
     <div class="container">
