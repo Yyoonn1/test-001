@@ -48,29 +48,43 @@ document.addEventListener('DOMContentLoaded', () => {
 
     generateBtn.addEventListener('click', generateName);
 
+    // --- Tab Switching Logic ---
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const targetTab = button.dataset.tab;
+
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+            });
+            tabButtons.forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            document.getElementById(targetTab).classList.add('active');
+            button.classList.add('active');
+        });
+    });
+
     // --- Teachable Machine Dog-face vs. Cat-face Test ---
     // Important: Replace "YOUR_TEACHABLE_MACHINE_MODEL_URL" with your actual model URL from Teachable Machine.
     // Example: "https://teachablemachine.withgoogle.com/models/abcdefg/"
-    const URL = "YOUR_TEACHABLE_MACHINE_MODEL_URL";
-    let model, webcam, maxPredictions;
+    const URL = "YOUR_TEACHABLE_MACHINE_MODEL_URL"; // User to replace this
+    let model, maxPredictions;
 
-    const webcamElement = document.getElementById('webcam');
-    const canvasElement = document.getElementById('canvas');
     const uploadedImageElement = document.getElementById('uploadedImage');
     const labelContainer = document.getElementById('label-container');
     const imageUpload = document.getElementById('imageUpload');
 
     const uploadButton = document.getElementById('uploadButton');
-    const cameraButton = document.getElementById('cameraButton');
-    const takePictureButton = document.getElementById('takePictureButton');
     const classifyButton = document.getElementById('classifyButton');
 
     // Event Listeners for the new feature
     uploadButton.addEventListener('click', () => imageUpload.click());
     imageUpload.addEventListener('change', handleImageUpload);
-    cameraButton.addEventListener('click', setupWebcam);
-    takePictureButton.addEventListener('click', takePicture);
-    classifyButton.addEventListener('click', predict); // Predict from webcam or uploaded image
+    classifyButton.addEventListener('click', predict);
 
     // Initial setup
     init();
@@ -101,60 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    async function setupWebcam() {
-        if (webcam) { // If webcam is already running, stop it
-            stopWebcam();
-        }
-        uploadedImageElement.style.display = 'none'; // Hide uploaded image
-        labelContainer.innerHTML = '<p class="placeholder">결과를 기다리는 중...</p>';
-
-
-        webcamElement.style.display = 'block';
-        takePictureButton.style.display = 'inline-block';
-        classifyButton.style.display = 'none'; // Classify after taking picture
-
-        const flip = true; // whether to flip the webcam
-        webcam = new tmImage.Webcam(webcamElement.width, webcamElement.height, flip); // width, height, flip
-        try {
-            await webcam.setup({ facingMode: "user" }); // request access to the webcam
-            await webcam.play();
-            webcamElement.style.display = 'block';
-            console.log("Webcam started.");
-        } catch (error) {
-            console.error("Failed to start webcam:", error);
-            webcamElement.style.display = 'none';
-            takePictureButton.style.display = 'none';
-            labelContainer.innerHTML = '<p style="color:red;">카메라 접근 권한이 없거나 카메라가 없습니다.</p>';
-        }
-    }
-
-    function stopWebcam() {
-        if (webcam) {
-            webcam.stop();
-            webcamElement.style.display = 'none';
-            takePictureButton.style.display = 'none';
-            webcam = null;
-        }
-    }
-
-    async function takePicture() {
-        if (!webcam) return;
-
-        const context = canvasElement.getContext('2d');
-        canvasElement.width = webcamElement.videoWidth;
-        canvasElement.height = webcamElement.videoHeight;
-        context.drawImage(webcamElement, 0, 0, webcamElement.videoWidth, webcamElement.videoHeight);
-        
-        uploadedImageElement.src = canvasElement.toDataURL('image/png');
-        uploadedImageElement.style.display = 'block';
-        stopWebcam(); // Stop webcam after taking picture
-        classifyButton.style.display = 'inline-block';
-        labelContainer.innerHTML = '<p class="placeholder">분류하기 버튼을 눌러주세요.</p>';
-    }
-
-
     async function handleImageUpload(event) {
-        stopWebcam(); // Stop webcam if it's running
         labelContainer.innerHTML = '<p class="placeholder">결과를 기다리는 중...</p>';
 
         const file = event.target.files[0];
@@ -176,19 +137,14 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        let imageToPredict;
-        if (uploadedImageElement.style.display === 'block' && uploadedImageElement.src) {
-            imageToPredict = uploadedImageElement;
-        } else if (webcamElement.style.display === 'block' && webcam) {
-            imageToPredict = webcamElement.webcamVideo(); // Get the video element from webcam
-        } else {
-            labelContainer.innerHTML = '<p style="color:red;">분류할 이미지가 없습니다. 사진을 업로드하거나 카메라로 촬영해주세요.</p>';
+        if (uploadedImageElement.style.display !== 'block' || !uploadedImageElement.src) {
+            labelContainer.innerHTML = '<p style="color:red;">분류할 이미지가 없습니다. 사진을 업로드해주세요.</p>';
             return;
         }
         
         labelContainer.innerHTML = '분류 중...';
 
-        const prediction = await model.predict(imageToPredict);
+        const prediction = await model.predict(uploadedImageElement);
         
         // Sort predictions by probability
         prediction.sort((a, b) => b.probability - a.probability);

@@ -7,33 +7,40 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <button id="themeToggle">🌓</button>
-        <h1>👶 탱글이 작명소 👶</h1>
-        <div id="namingResult" class="naming-result-container">
-            <p id="genderDisplay" class="placeholder">아이의 성별을 확인하고 이름을 지어보세요!</p>
-            <p id="nameDisplay" class="name-placeholder"></p>
-        </div>
-        <button id="generateBtn">이름 생성하기</button>
-    </div>
-
-    <div class="container face-recognition-container">
-        <h2>🐶 강아지상 vs 고양이상 🐱</h2>
-        <p>사진을 업로드하거나 카메라로 촬영하여 어떤 상인지 테스트해보세요!</p>
-
-        <div class="camera-upload-area">
-            <input type="file" id="imageUpload" accept="image/*" style="display: none;">
-            <button id="uploadButton">사진 업로드</button>
-            <button id="cameraButton">카메라 열기</button>
-            <video id="webcam" autoplay playsinline style="display: none; width: 100%; max-width: 300px;"></video>
-            <canvas id="canvas" style="display: none;"></canvas>
-            <img id="uploadedImage" style="max-width: 100%; display: none;">
-            <button id="takePictureButton" style="display: none;">사진 찍기</button>
+    <div id="app-container">
+        <div id="tab-nav">
+            <button class="tab-button active" data-tab="naming-service-tab">👶 탱글이 작명소</button>
+            <button class="tab-button" data-tab="face-test-tab">🐶 나는 강아지상?고양이상? 🐱</button>
         </div>
 
-        <button id="classifyButton" style="display: none;">분류하기</button>
-        <div id="label-container" class="classification-results">
-            <p class="placeholder">결과를 기다리는 중...</p>
+        <div id="naming-service-tab" class="tab-content active">
+            <div class="container">
+                <button id="themeToggle">🌓</button>
+                <h1>👶 탱글이 작명소 👶</h1>
+                <div id="namingResult" class="naming-result-container">
+                    <p id="genderDisplay" class="placeholder">아이의 성별을 확인하고 이름을 지어보세요!</p>
+                    <p id="nameDisplay" class="name-placeholder"></p>
+                </div>
+                <button id="generateBtn">이름 생성하기</button>
+            </div>
+        </div>
+
+        <div id="face-test-tab" class="tab-content">
+            <div class="container face-recognition-container">
+                <h2>🐶 강아지상 vs 고양이상 🐱</h2>
+                <p>사진을 업로드하여 어떤 상인지 테스트해보세요!</p>
+
+                <div class="camera-upload-area">
+                    <input type="file" id="imageUpload" accept="image/*" style="display: none;">
+                    <button id="uploadButton">사진 업로드</button>
+                    <img id="uploadedImage" style="max-width: 100%; display: none;">
+                </div>
+
+                <button id="classifyButton" style="display: none;">분류하기</button>
+                <div id="label-container" class="classification-results">
+                    <p class="placeholder">결과를 기다리는 중...</p>
+                </div>
+            </div>
         </div>
     </div>
 
