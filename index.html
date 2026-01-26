@@ -1,119 +1,20 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>밸런스 게임 AI - 당신의 본성을 폭로합니다</title>
-  <link href='/style.css' rel='stylesheet'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로또 번호 생성기</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <header class="main-header">
-      <div class="logo">Balance AI</div>
-    </header>
-
-    <main>
-      <section class="hero" id="hero-section">
-        <h1 id="hero-title">AI가 당신의 본성을 폭로합니다.</h1>
-        <p class="subtitle">당신은 정의로운 바보입니까, 매력적인 악당입니까?<br>10개의 밸런스 게임으로 당신의 숨겨진 '코어 타입'을 분석하세요.</p>
-        <a href="#" class="cta-button" id="start-quiz-btn">분석 시작하기</a>
-      </section>
-
-      <section class="quiz-section hidden" id="quiz-section">
-        <h2 id="question-text"></h2>
-        <div class="options-container">
-          <button class="option-btn" id="option-a"></button>
-          <button class="option-btn" id="option-b"></button>
+    <div class="container">
+        <h1>🍀 로또 번호 생성기 🍀</h1>
+        <div id="numbers" class="numbers-container">
+            <!-- 번호가 여기에 표시됩니다 -->
+            <span class="placeholder">버튼을 눌러 행운을 확인하세요!</span>
         </div>
-        <div class="progress-bar-container">
-          <div class="progress-bar" id="quiz-progress"></div>
-        </div>
-      </section>
-
-      <section class="result-section hidden" id="result-section">
-        <h2>당신의 코어 타입은...</h2>
-        <h3 id="result-type"></h3>
-        <p id="result-description"></p>
-        <div class="result-main-details">
-            <p>희귀도: <span id="result-rarity"></span></p>
-            <p>나와 궁합 최고: <span id="result-best-compat"></span></p>
-            <p>나와 궁합 최악: <span id="result-worst-compat"></span></p>
-        </div>
-        <h4 class="compat-section-title">다른 타입과의 궁합은?</h4>
-        <div id="all-compatibility-chart" class="compat-grid"></div>
-        <div class="share-options">
-            <button class="share-btn" id="share-result-btn">결과 공유하기</button>
-            <button class="share-btn" id="open-friend-compat-btn">친구와 궁합보기</button>
-        </div>
-        <a href="#" class="cta-button" id="restart-quiz-btn">다시 하기</a>
-      </section>
-
-      <section class="core-types">
-        <h2>당신은 어떤 타입입니까?</h2>
-        <div class="type-grid">
-          <div class="type-card">정의로운 바보</div>
-          <div class="type-card">우유부단한 유령</div>
-          <div class="type-card">극단적 생존주의자</div>
-          <div class="type-card">매력적인 악당</div>
-          <div class="type-card">고독한 천재</div>
-          <div class="type-card">열정적인 선동가</div>
-          <div class="type-card">AI 생성형 인간</div>
-          <div class="type-card">극효율 플래너</div>
-          <div class="type-card">감정적 갬블러</div>
-          <div class="type-card">침묵의 관찰자</div>
-          <div class="type-card">순진한 얼굴의 여우</div>
-          <div class="type-card">밈 발굴단</div>
-        </div>
-      </section>
-
-      <section class="how-it-works">
-        <div class="step">
-          <div class="step-number">1</div>
-          <h3>10개의 선택</h3>
-          <p>AI가 제시하는 딜레마 상황에서 당신의 선택을 증명하세요.</p>
-        </div>
-        <div class="step">
-          <div class="step-number">2</div>
-          <h3>AI의 분석</h3>
-          <p>당신의 선택들을 다각적으로 분석하여 핵심 본성을 추출합니다.</p>
-        </div>
-        <div class="step">
-          <div class="step-number">3</div>
-          <h3>코어 타입 확인</h3>
-          <p>희귀도와 상성 궁합 정보가 포함된 당신만의 코어 타입을 확인하세요.</p>
-        </div>
-      </section>
-    </main>
-
-    <footer class="main-footer">
-      <p>&copy; 2026 Balance AI. 분석 결과는 재미로만 즐겨주세요.</p>
-    </footer>
-  </div>
-
-  <!-- Modal Structure for Type Details -->
-  <div class="modal-overlay hidden" id="type-modal">
-    <div class="modal-content">
-      <button class="modal-close-btn" id="modal-close-btn">&times;</button>
-      <h3 id="modal-type-name"></h3>
-      <p id="modal-type-description"></p>
-      <h4 class="mt-20">이 타입과의 궁합은?</h4>
-      <div id="modal-compatibility-chart" class="compat-grid"></div>
+        <button id="generateBtn">번호 생성하기</button>
     </div>
-  </div>
-
-  <!-- Modal Structure for Friend Compatibility -->
-  <div class="modal-overlay hidden" id="friend-compat-modal">
-    <div class="modal-content">
-      <button class="modal-close-btn" id="friend-modal-close-btn">&times;</button>
-      <h3>친구와 궁합보기</h3>
-      <p>나의 타입: <span id="my-type-name"></span></p>
-      <select id="friend-type-select"></select>
-      <h4 id="friend-compat-result-title" class="mt-20"></h4>
-      <p id="friend-compat-result-desc"></p>
-      <button class="cta-button mt-20" id="calculate-friend-compat-btn">궁합 계산하기</button>
-    </div>
-  </div>
-
-  <script defer type="text/javascript" src="/main.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
