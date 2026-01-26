@@ -1,17 +1,21 @@
 :root {
-    --bg-color: #f0f2f5;
-    --container-bg: white;
-    --text-color: #333;
-    --placeholder-color: #888;
-    --shadow-color: rgba(0, 0, 0, 0.1);
-}
-
-body.dark-mode {
+    /* Dark Mode Defaults */
     --bg-color: #18191a;
     --container-bg: #242526;
     --text-color: #e4e6eb;
     --placeholder-color: #b0b3b8;
     --shadow-color: rgba(0, 0, 0, 0.4);
+    --border-color: #444;
+}
+
+body.light-mode {
+    /* Light Mode Overrides */
+    --bg-color: #f0f2f5;
+    --container-bg: white;
+    --text-color: #333;
+    --placeholder-color: #888;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --border-color: #ddd;
 }
 
 body {
@@ -45,6 +49,33 @@ h1, h2 {
     margin-bottom: 1.5rem;
 }
 
+.naming-result-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100px;
+    margin-bottom: 2rem;
+}
+
+#genderDisplay {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+#nameDisplay {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #4CAF50; /* A pleasant accent color */
+    word-break: keep-all; /* Prevent name from breaking into new lines awkwardly */
+}
+
+.name-placeholder {
+    color: var(--placeholder-color);
+    line-height: 40px;
+}
+
 .inquiry-container {
     text-align: left;
 }
@@ -60,20 +91,15 @@ h1, h2 {
     font-weight: bold;
 }
 
-.form-group input, 
+.form-group input,
 .form-group textarea {
     width: 100%;
     padding: 10px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-color);
     border-radius: 8px;
     background-color: var(--container-bg);
     color: var(--text-color);
     box-sizing: border-box;
-}
-
-body.dark-mode .form-group input,
-body.dark-mode .form-group textarea {
-    border-color: #444;
 }
 
 .form-group textarea {
@@ -83,32 +109,6 @@ body.dark-mode .form-group textarea {
 
 .inquiry-container button {
     width: 100%;
-}
-
-.numbers-container {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 2rem;
-    min-height: 50px;
-    flex-wrap: wrap;
-}
-
-.ball {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: bold;
-    color: white;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-}
-
-.placeholder {
-    color: var(--placeholder-color);
-    line-height: 40px;
 }
 
 button {
