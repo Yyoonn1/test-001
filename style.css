@@ -20,16 +20,24 @@ body.light-mode {
 
 body {
     font-family: 'Arial', sans-serif;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
-    min-height: 100vh;
-    margin: 2rem 0;
+    margin: 0;
     background-color: var(--bg-color);
     color: var(--text-color);
     transition: background-color 0.3s, color 0.3s;
+}
+
+header, footer {
+    padding: 1rem 2rem;
+    text-align: center;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem 0;
+    width: 100%;
 }
 
 .container {
@@ -39,9 +47,28 @@ body {
     box-shadow: 0 4px 6px var(--shadow-color);
     text-align: center;
     max-width: 90%;
-    width: 400px;
+    width: 500px; /* Increased width for better content display */
     position: relative;
     transition: background-color 0.3s, box-shadow 0.3s;
+    box-sizing: border-box;
+}
+.content-section {
+    text-align: left;
+}
+
+.content-section h2, .content-section h3 {
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.content-section p {
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+footer {
+    border-top: 1px solid var(--border-color);
+    margin-top: 2rem;
 }
 
 h1, h2 {
@@ -126,10 +153,29 @@ button:hover {
     background-color: #45a049;
 }
 
+header nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+header nav a, footer nav a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+header nav a:hover, footer nav a:hover {
+    text-decoration: underline;
+}
+
+footer nav {
+    margin-bottom: 1rem;
+}
+
 #themeToggle {
-    position: absolute;
-    top: 10px;
-    right: 10px;
     background: none;
     border: none;
     font-size: 24px;

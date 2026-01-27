@@ -10,22 +10,80 @@
      crossorigin="anonymous"></script>
 </head>
 <body>
-    <div class="container">
-        <button id="themeToggle">🌓</button>
+    <header class="container">
         <h1>👶 탱글이 작명소 👶</h1>
-        <div id="namingResult" class="naming-result-container">
-            <p id="genderDisplay" class="placeholder">아이의 성별을 확인하고 이름을 지어보세요!</p>
-            <p id="nameDisplay" class="name-placeholder"></p>
+        <nav>
+            <a href="index.html">홈</a> |
+            <a href="about.html">소개</a> |
+            <a href="privacy.html">개인정보처리방침</a>
+            <button id="themeToggle">🌓</button>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <div id="namingResult" class="naming-result-container">
+                <p id="genderDisplay" class="placeholder">아이의 성별을 확인하고 이름을 지어보세요!</p>
+                <p id="nameDisplay" class="name-placeholder"></p>
+            </div>
+            <button id="generateBtn">이름 생성하기</button>
         </div>
-        <button id="generateBtn">이름 생성하기</button>
-    </div>
+
+        <div class="container content-section">
+            <h2>'탱글이 작명소'에 오신 것을 환영합니다!</h2>
+            <p>
+                '탱글이 작명소'는 곧 태어날 소중한 아기를 위한 특별한 이름을 찾는 부모님들을 위한 공간입니다. 
+                이름은 한 사람의 인생에 큰 영향을 미치는 중요한 선물입니다. 저희는 전통적인 작명 원리와 현대적인 감각을 결합하여,
+                아름답고 의미 있는 이름을 추천해 드립니다.
+            </p>
+            <h3>어떻게 좋은 이름을 지을 수 있을까요?</h3>
+            <p>
+                좋은 이름은 부르기 쉽고, 듣기 좋으며, 긍정적인 의미를 담고 있어야 합니다. 또한, 아기의 성별과 가족의 가치관을 반영하는 것도 중요합니다.
+                '탱글이 작명소'에서는 성별에 따라 다양한 이름 후보를 생성하여 부모님들의 선택을 돕습니다. '이름 생성하기' 버튼을 눌러 지금 바로 아기에게 어울리는 예쁜 이름들을 만나보세요.
+            </p>
+            <h3>이름의 중요성</h3>
+            <p>
+                이름은 단순한 호칭을 넘어, 한 사람의 정체성을 형성하고 미래를 열어주는 열쇠가 될 수 있습니다. 
+                정성껏 지은 이름은 아기에게 주는 첫 번째이자 가장 소중한 선물이 될 것입니다. 
+                '탱글이 작명소'가 여러분의 특별한 선물 준비에 보탬이 되기를 바랍니다.
+            </p>
+        </div>
+
+        <div class="container">
+            <h2>댓글</h2>
+            <div id="disqus_thread"></div>
+        </div>
+
+        <div class="container inquiry-container">
+            <h2>🤝 제휴 문의</h2>
+            <form action="https://formspree.io/f/mdagzngo" method="POST">
+                <div class="form-group">
+                    <label for="name">성함/업체명</label>
+                    <input type="text" id="name" name="name" required placeholder="성함 또는 업체명을 입력해주세요">
+                </div>
+                <div class="form-group">
+                    <label for="email">이메일 주소</label>
+                    <input type="email" id="email" name="_replyto" required placeholder="example@email.com">
+                </div>
+                <div class="form-group">
+                    <label for="message">문의 내용</label>
+                    <textarea id="message" name="message" required placeholder="문의하실 내용을 입력해주세요"></textarea>
+                </div>
+                <button type="submit">문의 보내기</button>
+            </form>
+        </div>
+    </main>
+
+    <footer class="container">
+        <nav>
+            <a href="index.html">홈</a> |
+            <a href="about.html">소개</a> |
+            <a href="privacy.html">개인정보처리방침</a>
+        </nav>
+        <p>&copy; 2026 탱글이 작명소. All Rights Reserved.</p>
+    </footer>
 
     <script src="script.js"></script>
-
-    <div class="container">
-        <h2>댓글</h2>
-        <div id="disqus_thread"></div>
-    </div>
     <script>
         var disqus_config = function () {
         this.page.url = 'https://Yyoonn1.github.io/test-001/';
@@ -39,23 +97,5 @@
         })();
     </script>
     <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    <div class="container inquiry-container">
-        <h2>🤝 제휴 문의</h2>
-        <form action="https://formspree.io/f/mdagzngo" method="POST">
-            <div class="form-group">
-                <label for="name">성함/업체명</label>
-                <input type="text" id="name" name="name" required placeholder="성함 또는 업체명을 입력해주세요">
-            </div>
-            <div class="form-group">
-                <label for="email">이메일 주소</label>
-                <input type="email" id="email" name="_replyto" required placeholder="example@email.com">
-            </div>
-            <div class="form-group">
-                <label for="message">문의 내용</label>
-                <textarea id="message" name="message" required placeholder="문의하실 내용을 입력해주세요"></textarea>
-            </div>
-            <button type="submit">문의 보내기</button>
-        </form>
-    </div>
 </body>
 </html>
