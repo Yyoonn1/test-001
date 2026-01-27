@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
             navHome: "홈",
             navAbout: "소개",
             navPrivacy: "개인정보처리방침",
-            languageLabel: "언어 선택:",
+            languageLabel: "국가 선택:",
             langKorean: "한국어",
             langAmerican: "미국",
             langGerman: "독일",
@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
             navHome: "Home",
             navAbout: "About",
             navPrivacy: "Privacy Policy",
-            languageLabel: "Select Language:",
+            languageLabel: "Select Country:",
             langKorean: "Korean",
             langAmerican: "American",
             langGerman: "German",
@@ -179,34 +179,167 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const namesByLanguage = {
         korean: {
-            boy: ["하준", "도윤", "서준", "이준", "시우", "은우", "현우", "준우", "건우", "우진", "민준", "지호", "예준", "유준", "로운", "지우", "하진", "준서", "도현", "태윤"],
-            girl: ["하윤", "서윤", "지유", "서아", "지아", "하은", "아린", "수아", "서현", "채원", "아윤", "은서", "예린", "윤슬", "다은", "예나", "시아", "수민", "하율", "지은"]
+            boy: [
+                { name: "하준", meaning: "하늘처럼 높고 넓은 마음을 가지며, 지혜롭게 세상을 이끌어갈 아이" },
+                { name: "도윤", meaning: "모든 길을 밝히는 빛처럼, 바르게 성장하여 주변에 긍정적인 영향을 주는 아이" },
+                { name: "서준", meaning: "굳건한 의지로 목표를 향해 나아가며, 세상을 이롭게 할 아이" },
+                { name: "이준", meaning: "매사에 뛰어난 재능을 발휘하고, 항상 지혜롭게 판단하는 아이" },
+                { name: "시우", meaning: "시간이 지날수록 더욱 빛나는 존재가 되어, 넓은 세상을 포용할 아이" },
+                { name: "은우", meaning: "은은한 매력과 뛰어난 재능으로, 많은 사람에게 사랑받을 아이" },
+                { name: "현우", meaning: "깊은 지혜와 뛰어난 능력을 겸비하여, 세상을 밝게 비출 아이" },
+                { name: "준우", meaning: "뛰어난 리더십과 따뜻한 마음으로, 주변을 이끌어갈 아이" },
+                { name: "건우", meaning: "튼튼한 몸과 건강한 정신으로, 모든 어려움을 극복할 아이" },
+                { name: "우진", meaning: "우아하고 진실된 마음으로, 항상 정의롭게 행동할 아이" }
+            ],
+            girl: [
+                { name: "하윤", meaning: "하늘처럼 맑고 고운 마음으로, 주변을 밝히는 아이" },
+                { name: "서윤", meaning: "아름다운 향기처럼 널리 퍼지는 존재가 되어, 사랑받을 아이" },
+                { name: "지유", meaning: "지혜롭고 자유로운 영혼으로, 자신만의 길을 개척할 아이" },
+                { name: "서아", meaning: "평화롭고 온화한 성품으로, 세상을 따뜻하게 할 아이" },
+                { name: "지아", meaning: "지혜와 아름다움을 겸비하여, 많은 사람에게 귀감이 될 아이" },
+                { name: "하은", meaning: "하늘의 은총처럼 귀하게 여겨지며, 항상 감사하며 살아갈 아이" },
+                { name: "아린", meaning: "고귀하고 신비로운 매력으로, 모든 이에게 영감을 줄 아이" },
+                { name: "수아", meaning: "빼어난 아름다움과 밝은 기운으로, 주변을 행복하게 할 아이" },
+                { name: "서현", meaning: "현명하고 지혜로운 판단으로, 언제나 올바른 길을 선택할 아이" },
+                { name: "채원", meaning: "아름다운 꽃처럼 활짝 피어나, 세상에 긍정적인 에너지를 전할 아이" }
+            ]
         },
         american: {
-            boy: ["James", "John", "Robert", "Michael", "William", "David", "Richard", "Joseph", "Thomas", "Charles"],
-            girl: ["Mary", "Patricia", "Jennifer", "Linda", "Elizabeth", "Barbara", "Susan", "Jessica", "Sarah", "Karen"]
+            boy: [
+                { name: "James", meaning: "A classic name, signifying strength and tradition, for a child who will lead with integrity." },
+                { name: "John", meaning: "Meaning 'God is gracious,' for a child who will bring joy and kindness to the world." },
+                { name: "Robert", meaning: "A noble and bright name, for a child destined for fame and brilliance." },
+                { name: "Michael", meaning: "Meaning 'who is like God,' for a child with a pure heart and strong spirit." },
+                { name: "William", meaning: "A resolute protector, for a child who will be a pillar of strength for others." },
+                { name: "David", meaning: "Meaning 'beloved,' for a child who will be cherished and inspire love in return." },
+                { name: "Richard", meaning: "A powerful ruler, for a child with strong leadership qualities." },
+                { name: "Joseph", meaning: "Meaning 'he will add,' for a child who will bring growth and abundance." },
+                { name: "Thomas", meaning: "A twin, for a child who will be a loyal companion and friend." },
+                { name: "Charles", meaning: "Meaning 'free man,' for a child with an independent and adventurous spirit." }
+            ],
+            girl: [
+                { name: "Mary", meaning: "A timeless name, meaning 'star of the sea,' for a child who will guide and inspire." },
+                { name: "Patricia", meaning: "Meaning 'noble,' for a child with grace and dignity." },
+                { name: "Jennifer", meaning: "A fair spirit, for a child who will bring beauty and kindness." },
+                { name: "Linda", meaning: "Meaning 'beautiful,' for a child whose inner and outer beauty will shine." },
+                { name: "Elizabeth", meaning: "Meaning 'my God is abundance,' for a child blessed with richness of spirit." },
+                { name: "Barbara", meaning: "A traveler from a foreign land, for a child with a curious and adventurous soul." },
+                { name: "Susan", meaning: "A graceful lily, for a child who will grow with purity and elegance." },
+                { name: "Jessica", meaning: "Meaning 'richness' or 'God beholds,' for a child with insight and prosperity." },
+                { name: "Sarah", meaning: "A princess, for a child who will lead with charm and strength." },
+                { name: "Karen", meaning: "Meaning 'pure,' for a child with an innocent heart and clear intentions." }
+            ]
         },
         german: {
-            boy: ["Ben", "Paul", "Jonas", "Leon", "Finn", "Elias", "Maximilian", "Felix", "Noah", "Luis"],
-            girl: ["Mia", "Emma", "Hannah", "Sophia", "Anna", "Lena", "Emilia", "Marie", "Lina", "Lea"]
+            boy: [
+                { name: "Ben", meaning: "This name signifies a strong and wise leader." },
+                { name: "Paul", meaning: "This name is for a child who will be humble and small, yet great in spirit." },
+                { name: "Jonas", meaning: "This name means 'dove,' for a child who will bring peace." },
+                { name: "Leon", meaning: "This name signifies a brave and courageous lion." },
+                { name: "Finn", meaning: "This name means 'fair' or 'white,' for a child with a pure heart." },
+                { name: "Elias", meaning: "This name means 'the Lord is my God,' for a child with strong faith." },
+                { name: "Maximilian", meaning: "This name signifies the greatest, for a child destined for greatness." },
+                { name: "Felix", meaning: "This name means 'lucky' or 'successful,' for a child with good fortune." },
+                { name: "Noah", meaning: "This name means 'rest' or 'comfort,' for a child who will bring solace." },
+                { name: "Luis", meaning: "This name signifies a famous warrior, for a child with a strong will." }
+            ],
+            girl: [
+                { name: "Mia", meaning: "This name means 'mine' or 'bitter,' for a child who will be deeply loved." },
+                { name: "Emma", meaning: "This name means 'universal,' for a child who will connect with everyone." },
+                { name: "Hannah", meaning: "This name means 'grace,' for a child with elegance and charm." },
+                { name: "Sophia", meaning: "This name means 'wisdom,' for a child with great intellect." },
+                { name: "Anna", meaning: "This name means 'grace' or 'favor,' for a child who will be blessed." },
+                { name: "Lena", meaning: "This name means 'light,' for a child who will illuminate the lives of others." },
+                { name: "Emilia", meaning: "This name means 'rival,' for a child with a competitive spirit." },
+                { name: "Marie", meaning: "This name means 'star of the sea,' for a child who will guide and inspire." },
+                { name: "Lina", meaning: "This name means 'light' or 'tender,' for a child with a gentle spirit." },
+                { name: "Lea", meaning: "This name means 'weary,' for a child who will find peace and rest." }
+            ]
         },
         japanese: {
-            boy: ["Aoi", "Ren", "Haruto", "Yuma", "Sota", "Minato", "Yuki", "Kaito", "Riku", "Hayato"],
-            girl: ["Himari", "Hina", "Yui", "Sakura", "Rin", "Mei", "Yua", "Saki", "Akari", "Ichika"]
+            boy: [
+                { name: "Aoi", meaning: "This name signifies 'hollyhock' or 'blue,' for a child with a vibrant spirit." },
+                { name: "Ren", meaning: "This name means 'lotus' or 'love,' for a child who will be pure and compassionate." },
+                { name: "Haruto", meaning: "This name means 'spring' and 'fly,' for a child who will soar high with joy." },
+                { name: "Yuma", meaning: "This name means 'leisure' and 'truth,' for a child who will live a life of peace and honesty." },
+                { name: "Sota", meaning: "This name means 'suddenly' and 'great,' for a child with unexpected greatness." },
+                { name: "Minato", meaning: "This name means 'harbor,' for a child who will be a safe haven for others." },
+                { name: "Yuki", meaning: "This name means 'happiness' or 'snow,' for a child who brings joy and purity." },
+                { name: "Kaito", meaning: "This name means 'ocean' and 'fly,' for a child with a vast and adventurous spirit." },
+                { name: "Riku", meaning: "This name means 'land' or 'continent,' for a child who will be grounded and strong." },
+                { name: "Hayato", meaning: "This name means 'falcon,' for a child who will be swift and decisive." }
+            ],
+            girl: [
+                { name: "Himari", meaning: "This name means 'hollyhock' and 'good,' for a child who will be cheerful and bright like the sun." },
+                { name: "Hina", meaning: "This name means 'good' or 'light,' for a child who will be radiant and lovely." },
+                { name: "Yui", meaning: "This name means 'tie' or 'bind,' for a child who will connect people with love." },
+                { name: "Sakura", meaning: "This name means 'cherry blossom,' for a child with delicate beauty and transient charm." },
+                { name: "Rin", meaning: "This name means 'dignified' or 'severe,' for a child with inner strength and grace." },
+                { name: "Mei", meaning: "This name means 'bud' or 'sprout,' for a child who will grow beautifully." },
+                { name: "Yua", meaning: "This name means 'binding love,' for a child who will be deeply cherished." },
+                { name: "Saki", meaning: "This name means 'blossom' or 'hope,' for a child who will bring forth new possibilities." },
+                { name: "Akari", meaning: "This name means 'light' or 'brightness,' for a child who will illuminate the world." },
+                { name: "Ichika", meaning: "This name means 'one thousand flowers,' for a child with diverse talents and beauty." }
+            ]
         },
         chinese: {
-            boy: ["Wei", "Fang", "Min", "Jian", "Hao", "Cheng", "Zhi", "Liang", "Yong", "Qiang"],
-            girl: ["Mei", "Ling", "Jing", "Yan", "Huan", "Xiu", "Lan", "Fang", "Qing", "Ying"]
+            boy: [
+                { name: "Wei", meaning: "This name signifies 'greatness' and 'power,' for a child destined for influence." },
+                { name: "Fang", meaning: "This name means 'square' or 'upright,' for a child with integrity and honesty." },
+                { name: "Min", meaning: "This name means 'clever' or 'sharp,' for a child with quick wit and intelligence." },
+                { name: "Jian", meaning: "This name means 'establish' or 'build,' for a child who will create and achieve." },
+                { name: "Hao", meaning: "This name means 'brave' or 'heroic,' for a child with courage and strength." },
+                { name: "Cheng", meaning: "This name means 'accomplish' or 'succeed,' for a child who will achieve great things." },
+                { name: "Zhi", meaning: "This name means 'wisdom' or 'knowledge,' for a child with deep understanding." },
+                { name: "Liang", meaning: "This name means 'bright' or 'good,' for a child with a shining personality." },
+                { name: "Yong", meaning: "This name means 'brave' or 'courageous,' for a child with an unyielding spirit." },
+                { name: "Qiang", meaning: "This name means 'strong' or 'powerful,' for a child with immense inner strength." }
+            ],
+            girl: [
+                { name: "Mei", meaning: "This name means 'beautiful,' for a child whose charm will captivate all." },
+                { name: "Ling", meaning: "This name means 'spirit' or 'sound of jade,' for a child with a pure soul." },
+                { name: "Jing", meaning: "This name means 'quiet' or 'still,' for a child with inner peace." },
+                { name: "Yan", meaning: "This name means 'swallow' or 'beautiful,' for a child with grace and agility." },
+                { name: "Huan", meaning: "This name means 'joy' or 'happy,' for a child who will bring delight." },
+                { name: "Xiu", meaning: "This name means 'elegant' or 'graceful,' for a child with refined beauty." },
+                { name: "Lan", meaning: "This name means 'orchid,' for a child with delicate beauty and strength." },
+                { name: "Fang", meaning: "This name means 'fragrant,' for a child whose presence will be a sweet scent." },
+                { name: "Qing", meaning: "This name means 'clear' or 'pure,' for a child with an unblemished spirit." },
+                { name: "Ying", meaning: "This name means 'flower' or 'heroine,' for a child who will bloom brilliantly." }
+            ]
         },
         spanish: {
-            boy: ["Santiago", "Mateo", "Sebastián", "Leonardo", "Matías", "Diego", "Daniel", "Alejandro", "Samuel", "Benjamín"],
-            girl: ["Sofía", "Isabella", "Valentina", "Camila", "Valeria", "Mariana", "Luciana", "Daniela", "Sara", "Victoria"]
+            boy: [
+                { name: "Santiago", meaning: "This name means 'Saint James,' for a child with a strong and devout spirit." },
+                { name: "Mateo", meaning: "This name means 'gift of God,' for a child who is a blessing to all." },
+                { name: "Sebastián", meaning: "This name means 'venerable,' for a child who will be respected and admired." },
+                { name: "Leonardo", meaning: "This name means 'brave as a lion,' for a child with courage and artistic talent." },
+                { name: "Matías", meaning: "This name means 'gift of God,' for a child who is a true present." },
+                { name: "Diego", meaning: "This name means 'supplanter,' for a child who will overcome challenges." },
+                { name: "Daniel", meaning: "This name means 'God is my judge,' for a child with strong moral compass." },
+                { name: "Alejandro", meaning: "This name means 'defender of mankind,' for a child who will protect others." },
+                { name: "Samuel", meaning: "This name means 'heard by God,' for a child who is divinely connected." },
+                { name: "Benjamín", meaning: "This name means 'son of the right hand,' for a child who is fortunate and favored." }
+            ],
+            girl: [
+                { name: "Sofía", meaning: "This name means 'wisdom,' for a child with deep understanding and insight." },
+                { name: "Isabella", meaning: "This name means 'devoted to God,' for a child with strong faith." },
+                { name: "Valentina", meaning: "This name means 'strong' or 'healthy,' for a child with vigor and spirit." },
+                { name: "Camila", meaning: "This name means 'attendant at a sacrifice,' for a child with a noble heart." },
+                { name: "Valeria", meaning: "This name means 'strength' or 'health,' for a child who is vibrant and robust." },
+                { name: "Mariana", meaning: "This name is a blend of Mary and Ana, for a child with grace and purity." },
+                { name: "Luciana", meaning: "This name means 'light,' for a child who will bring brightness and joy." },
+                { name: "Daniela", meaning: "This name means 'God is my judge,' for a child with strong moral principles." },
+                { name: "Sara", meaning: "This name means 'princess,' for a child with leadership and charm." },
+                { name: "Victoria", meaning: "This name means 'victory,' for a child who will achieve triumph in life." }
+            ]
         }
     };
 
     function generateName() {
         const genderDisplay = document.getElementById('genderDisplay');
         const nameDisplay = document.getElementById('nameDisplay');
+        const meaningDisplay = document.getElementById('meaningDisplay'); // Get meaning display element
         const selectedLanguage = languageSelect.value;
 
         const names = namesByLanguage[selectedLanguage];
@@ -215,11 +348,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const genderText = isBoy ? translations[currentLang].congratsBoy : translations[currentLang].congratsGirl;
         
         const nameList = isBoy ? names.boy : names.girl;
-        const randomName = nameList[Math.floor(Math.random() * nameList.length)];
+        const randomNameObject = nameList[Math.floor(Math.random() * nameList.length)]; // Get name object
+        const randomName = randomNameObject.name;
+        const nameMeaning = randomNameObject.meaning;
 
         genderDisplay.textContent = genderText;
         nameDisplay.textContent = randomName;
+        meaningDisplay.textContent = nameMeaning; // Display the meaning
         nameDisplay.classList.remove('name-placeholder'); // Remove placeholder class if it exists
+        meaningDisplay.classList.remove('meaning-placeholder'); // Remove placeholder class if it exists
     }
 
     generateBtn.addEventListener('click', generateName);

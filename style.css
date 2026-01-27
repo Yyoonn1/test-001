@@ -82,6 +82,13 @@ h1, h2 {
     line-height: 40px;
 }
 
+.meaning-placeholder {
+    color: #888; /* Light Mode Placeholder Color */
+    font-size: 1.1em;
+    margin-top: 10px;
+    line-height: 1.5;
+}
+
 .inquiry-container {
     text-align: left;
 }
