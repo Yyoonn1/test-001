@@ -15,8 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
             navAbout: "소개",
             navPrivacy: "개인정보처리방침",
             languageLabel: "국가 선택:",
-            langKorean: "한국어",
-            langAmerican: "미국",
+            langSouthKorea: "대한민국",
+            langUnitedStates: "미국",
             langGerman: "독일",
             langJapanese: "일본",
             langChinese: "중국",
@@ -83,8 +83,8 @@ document.addEventListener('DOMContentLoaded', () => {
             navAbout: "About",
             navPrivacy: "Privacy Policy",
             languageLabel: "Select Country:",
-            langKorean: "Korean",
-            langAmerican: "American",
+            langSouthKorea: "South Korea",
+            langUnitedStates: "United States",
             langGerman: "German",
             langJapanese: "Japanese",
             langChinese: "Chinese",
@@ -180,28 +180,28 @@ document.addEventListener('DOMContentLoaded', () => {
     const namesByLanguage = {
         korean: {
             boy: [
-                { name: "하준", meaning: "하늘처럼 높고 넓은 마음을 가지며, 지혜롭게 세상을 이끌어갈 아이" },
-                { name: "도윤", meaning: "모든 길을 밝히는 빛처럼, 바르게 성장하여 주변에 긍정적인 영향을 주는 아이" },
-                { name: "서준", meaning: "굳건한 의지로 목표를 향해 나아가며, 세상을 이롭게 할 아이" },
-                { name: "이준", meaning: "매사에 뛰어난 재능을 발휘하고, 항상 지혜롭게 판단하는 아이" },
-                { name: "시우", meaning: "시간이 지날수록 더욱 빛나는 존재가 되어, 넓은 세상을 포용할 아이" },
-                { name: "은우", meaning: "은은한 매력과 뛰어난 재능으로, 많은 사람에게 사랑받을 아이" },
-                { name: "현우", meaning: "깊은 지혜와 뛰어난 능력을 겸비하여, 세상을 밝게 비출 아이" },
-                { name: "준우", meaning: "뛰어난 리더십과 따뜻한 마음으로, 주변을 이끌어갈 아이" },
-                { name: "건우", meaning: "튼튼한 몸과 건강한 정신으로, 모든 어려움을 극복할 아이" },
-                { name: "우진", meaning: "우아하고 진실된 마음으로, 항상 정의롭게 행동할 아이" }
+                { name: "하준", meaning: "하늘처럼 높고 넓은 마음을 가지며, 지혜롭게 세상을 이끌어갈 아이", englishName: "Hajun", englishMeaning: "A child with a mind as high and vast as the sky, who will wisely lead the world." },
+                { name: "도윤", meaning: "모든 길을 밝히는 빛처럼, 바르게 성장하여 주변에 긍정적인 영향을 주는 아이", englishName: "Doyun", englishMeaning: "Like a light that illuminates all paths, a child who will grow upright and positively influence those around them." },
+                { name: "서준", meaning: "굳건한 의지로 목표를 향해 나아가며, 세상을 이롭게 할 아이", englishName: "Seojun", englishMeaning: "A child who will advance towards goals with firm resolve and benefit the world." },
+                { name: "이준", meaning: "매사에 뛰어난 재능을 발휘하고, 항상 지혜롭게 판단하는 아이", englishName: "Ijun", englishMeaning: "A child who will display outstanding talent in all matters and always make wise judgments." },
+                { name: "시우", meaning: "시간이 지날수록 더욱 빛나는 존재가 되어, 넓은 세상을 포용할 아이", englishName: "Shiwoo", englishMeaning: "A child who will become an increasingly radiant presence over time, embracing the vast world." },
+                { name: "은우", meaning: "은은한 매력과 뛰어난 재능으로, 많은 사람에게 사랑받을 아이", englishName: "Eunwoo", englishMeaning: "A child with subtle charm and exceptional talent, who will be loved by many." },
+                { name: "현우", meaning: "깊은 지혜와 뛰어난 능력을 겸비하여, 세상을 밝게 비출 아이", englishName: "Hyunwoo", englishMeaning: "A child possessing deep wisdom and outstanding abilities, who will brightly illuminate the world." },
+                { name: "준우", meaning: "뛰어난 리더십과 따뜻한 마음으로, 주변을 이끌어갈 아이", englishName: "Junwoo", englishMeaning: "A child with excellent leadership and a warm heart, who will lead those around them." },
+                { name: "건우", meaning: "튼튼한 몸과 건강한 정신으로, 모든 어려움을 극복할 아이", englishName: "Geonwoo", englishMeaning: "A child with a strong body and healthy mind, who will overcome all difficulties." },
+                { name: "우진", meaning: "우아하고 진실된 마음으로, 항상 정의롭게 행동할 아이", englishName: "Woojin", englishMeaning: "A child with an elegant and truthful heart, who will always act righteously." }
             ],
             girl: [
-                { name: "하윤", meaning: "하늘처럼 맑고 고운 마음으로, 주변을 밝히는 아이" },
-                { name: "서윤", meaning: "아름다운 향기처럼 널리 퍼지는 존재가 되어, 사랑받을 아이" },
-                { name: "지유", meaning: "지혜롭고 자유로운 영혼으로, 자신만의 길을 개척할 아이" },
-                { name: "서아", meaning: "평화롭고 온화한 성품으로, 세상을 따뜻하게 할 아이" },
-                { name: "지아", meaning: "지혜와 아름다움을 겸비하여, 많은 사람에게 귀감이 될 아이" },
-                { name: "하은", meaning: "하늘의 은총처럼 귀하게 여겨지며, 항상 감사하며 살아갈 아이" },
-                { name: "아린", meaning: "고귀하고 신비로운 매력으로, 모든 이에게 영감을 줄 아이" },
-                { name: "수아", meaning: "빼어난 아름다움과 밝은 기운으로, 주변을 행복하게 할 아이" },
-                { name: "서현", meaning: "현명하고 지혜로운 판단으로, 언제나 올바른 길을 선택할 아이" },
-                { name: "채원", meaning: "아름다운 꽃처럼 활짝 피어나, 세상에 긍정적인 에너지를 전할 아이" }
+                { name: "하윤", meaning: "하늘처럼 맑고 고운 마음으로, 주변을 밝히는 아이", englishName: "Hayun", englishMeaning: "A child with a clear and beautiful heart like the sky, who will brighten their surroundings." },
+                { name: "서윤", meaning: "아름다운 향기처럼 널리 퍼지는 존재가 되어, 사랑받을 아이", englishName: "Seoyun", englishMeaning: "A child who will be loved, spreading like a beautiful fragrance." },
+                { name: "지유", meaning: "지혜롭고 자유로운 영혼으로, 자신만의 길을 개척할 아이", englishName: "Jiyu", englishMeaning: "A child with a wise and free spirit, who will forge their own path." },
+                { name: "서아", meaning: "평화롭고 온화한 성품으로, 세상을 따뜻하게 할 아이", englishName: "Seoah", englishMeaning: "A child with a peaceful and gentle nature, who will warm the world." },
+                { name: "지아", meaning: "지혜와 아름다움을 겸비하여, 많은 사람에게 귀감이 될 아이", englishName: "Jia", englishMeaning: "A child possessing both wisdom and beauty, who will be an example to many." },
+                { name: "하은", meaning: "하늘의 은총처럼 귀하게 여겨지며, 항상 감사하며 살아갈 아이", englishName: "Haeun", englishMeaning: "A child cherished like a blessing from heaven, who will always live with gratitude." },
+                { name: "아린", meaning: "고귀하고 신비로운 매력으로, 모든 이에게 영감을 줄 아이", englishName: "Arin", englishMeaning: "A child with noble and mysterious charm, who will inspire everyone." },
+                { name: "수아", meaning: "빼어난 아름다움과 밝은 기운으로, 주변을 행복하게 할 아이", englishName: "Sua", englishMeaning: "A child with outstanding beauty and bright energy, who will bring happiness to those around them." },
+                { name: "서현", meaning: "현명하고 지혜로운 판단으로, 언제나 올바른 길을 선택할 아이", englishName: "Seohyun", englishMeaning: "A child with wise and discerning judgment, who will always choose the right path." },
+                { name: "채원", meaning: "아름다운 꽃처럼 활짝 피어나, 세상에 긍정적인 에너지를 전할 아이", englishName: "Chaewon", englishMeaning: "A child who will bloom beautifully like a flower, spreading positive energy to the world." }
             ]
         },
         american: {
@@ -348,13 +348,18 @@ document.addEventListener('DOMContentLoaded', () => {
         const genderText = isBoy ? translations[currentLang].congratsBoy : translations[currentLang].congratsGirl;
         
         const nameList = isBoy ? names.boy : names.girl;
-        const randomNameObject = nameList[Math.floor(Math.random() * nameList.length)]; // Get name object
-        const randomName = randomNameObject.name;
-        const nameMeaning = randomNameObject.meaning;
+        const randomNameObject = nameList[Math.floor(Math.random() * nameList.length)];
+        let displayedName = randomNameObject.name;
+        let displayedMeaning = randomNameObject.meaning;
+
+        if (currentLang === 'en' && selectedLanguage === 'korean') {
+            displayedName = randomNameObject.englishName || randomNameObject.name;
+            displayedMeaning = randomNameObject.englishMeaning || randomNameObject.meaning;
+        }
 
         genderDisplay.textContent = genderText;
-        nameDisplay.textContent = randomName;
-        meaningDisplay.textContent = nameMeaning; // Display the meaning
+        nameDisplay.textContent = displayedName;
+        meaningDisplay.textContent = displayedMeaning;
         nameDisplay.classList.remove('name-placeholder'); // Remove placeholder class if it exists
         meaningDisplay.classList.remove('meaning-placeholder'); // Remove placeholder class if it exists
     }
