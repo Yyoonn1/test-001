@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const themeToggle = document.getElementById('themeToggle');
     const body = document.body;
     const generateBtn = document.getElementById('generateBtn');
+    const languageSelect = document.getElementById('language');
 
     // Load saved theme, default to dark
     if (localStorage.getItem('theme') === 'light') {
@@ -23,22 +24,42 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    const boyNames = [
-        "김하준", "김도윤", "김서준", "김이준", "김시우", "김은우", "김현우", "김준우", "김건우", "김우진",
-        "김민준", "김지호", "김예준", "김유준", "김로운", "김지우", "김하진", "김준서", "김도현", "김태윤"
-    ];
-    const girlNames = [
-        "김하윤", "김서윤", "김지유", "김서아", "김지아", "김하은", "김아린", "김수아", "김서현", "김채원",
-        "김아윤", "김은서", "김예린", "김윤슬", "김다은", "김예나", "김시아", "김수민", "김하율", "김지은"
-    ];
+    const namesByLanguage = {
+        korean: {
+            boy: ["하준", "도윤", "서준", "이준", "시우", "은우", "현우", "준우", "건우", "우진", "민준", "지호", "예준", "유준", "로운", "지우", "하진", "준서", "도현", "태윤"],
+            girl: ["하윤", "서윤", "지유", "서아", "지아", "하은", "아린", "수아", "서현", "채원", "아윤", "은서", "예린", "윤슬", "다은", "예나", "시아", "수민", "하율", "지은"]
+        },
+        american: {
+            boy: ["James", "John", "Robert", "Michael", "William", "David", "Richard", "Joseph", "Thomas", "Charles"],
+            girl: ["Mary", "Patricia", "Jennifer", "Linda", "Elizabeth", "Barbara", "Susan", "Jessica", "Sarah", "Karen"]
+        },
+        german: {
+            boy: ["Ben", "Paul", "Jonas", "Leon", "Finn", "Elias", "Maximilian", "Felix", "Noah", "Luis"],
+            girl: ["Mia", "Emma", "Hannah", "Sophia", "Anna", "Lena", "Emilia", "Marie", "Lina", "Lea"]
+        },
+        japanese: {
+            boy: ["Aoi", "Ren", "Haruto", "Yuma", "Sota", "Minato", "Yuki", "Kaito", "Riku", "Hayato"],
+            girl: ["Himari", "Hina", "Yui", "Sakura", "Rin", "Mei", "Yua", "Saki", "Akari", "Ichika"]
+        },
+        chinese: {
+            boy: ["Wei", "Fang", "Min", "Jian", "Hao", "Cheng", "Zhi", "Liang", "Yong", "Qiang"],
+            girl: ["Mei", "Ling", "Jing", "Yan", "Huan", "Xiu", "Lan", "Fang", "Qing", "Ying"]
+        },
+        spanish: {
+            boy: ["Santiago", "Mateo", "Sebastián", "Leonardo", "Matías", "Diego", "Daniel", "Alejandro", "Samuel", "Benjamín"],
+            girl: ["Sofía", "Isabella", "Valentina", "Camila", "Valeria", "Mariana", "Luciana", "Daniela", "Sara", "Victoria"]
+        }
+    };
 
     function generateName() {
         const genderDisplay = document.getElementById('genderDisplay');
         const nameDisplay = document.getElementById('nameDisplay');
+        const selectedLanguage = languageSelect.value;
 
+        const names = namesByLanguage[selectedLanguage];
         const isBoy = Math.random() < 0.5; // 50% chance for boy or girl
         const gender = isBoy ? '아들' : '딸';
-        const nameList = isBoy ? boyNames : girlNames;
+        const nameList = isBoy ? names.boy : names.girl;
         const randomName = nameList[Math.floor(Math.random() * nameList.length)];
 
         genderDisplay.textContent = `축하합니다! ${gender}입니다!`;
