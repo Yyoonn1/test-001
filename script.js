@@ -368,4 +368,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Set initial language
     setLanguage(currentLang);
+    generateName();
 });

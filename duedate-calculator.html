@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>출산 예정일 계산기 - 우리 아이 성장 스토리</title>
+    <link rel="stylesheet" href="style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1570006999357144"
+     crossorigin="anonymous"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KMH7NRJCVG"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-KMH7NRJCVG');
+    </script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1><a href="index.html">우리 아이 성장 스토리</a></h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">홈</a></li>
+                    <li><a href="blog.html">블로그</a></li>
+                    <li><a href="duedate-calculator.html">예정일 계산기</a></li>
+                    <li><a href="about.html">소개</a></li>
+                    <li><a href="privacy.html">개인정보처리방침</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container content-section">
+            <h2>출산 예정일 계산기</h2>
+            <p>
+                마지막 월경 시작일 또는 예상되는 임신 시작일을 입력하여 출산 예정일을 확인해보세요.
+                일반적으로 임신 기간은 마지막 월경 시작일로부터 약 280일(40주)입니다.
+            </p>
+
+            <div class="form-group">
+                <label for="lastPeriodDate">마지막 월경 시작일:</label>
+                <input type="date" id="lastPeriodDate">
+            </div>
+
+            <div class="form-group">
+                <label for="conceptionDate">예상 임신 시작일:</label>
+                <input type="date" id="conceptionDate">
+            </div>
+
+            <button id="calculateDueDateBtn">예정일 계산하기</button>
+
+            <div class="result-box naming-result-container" style="margin-top: 30px; display: none;">
+                <p id="dueDateResult" style="font-size: 1.5em; font-weight: bold; color: var(--color-primary-dark);"></p>
+                <p id="conceptionInfo" style="font-size: 1em; color: var(--color-text-medium);"></p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 우리 아이 성장 스토리. All rights reserved.</p>
+            <p><a href="privacy.html">개인정보처리방침</a></p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const lastPeriodDateInput = document.getElementById('lastPeriodDate');
+            const conceptionDateInput = document.getElementById('conceptionDate');
+            const calculateBtn = document.getElementById('calculateDueDateBtn');
+            const dueDateResult = document.getElementById('dueDateResult');
+            const conceptionInfo = document.getElementById('conceptionInfo');
+            const resultBox = document.querySelector('.result-box');
+
+            function calculateDueDate() {
+                let startDate;
+                let calculationMethod;
+
+                if (lastPeriodDateInput.value) {
+                    startDate = new Date(lastPeriodDateInput.value);
+                    calculationMethod = 'lastPeriod';
+                } else if (conceptionDateInput.value) {
+                    startDate = new Date(conceptionDateInput.value);
+                    calculationMethod = 'conception';
+                } else {
+                    alert('마지막 월경 시작일 또는 예상 임신 시작일을 입력해주세요.');
+                    return;
+                }
+
+                if (isNaN(startDate.getTime())) {
+                    alert('유효한 날짜를 입력해주세요.');
+                    return;
+                }
+
+                let dueDate = new Date(startDate);
+
+                if (calculationMethod === 'lastPeriod') {
+                    // Add 280 days (40 weeks) for LMP method
+                    dueDate.setDate(dueDate.getDate() + 280);
+                    conceptionInfo.textContent = `마지막 월경 시작일(${lastPeriodDateInput.value}) 기준`;
+                } else { // conceptionMethod
+                    // Add 266 days (38 weeks) for conception method
+                    dueDate.setDate(dueDate.getDate() + 266);
+                    conceptionInfo.textContent = `예상 임신 시작일(${conceptionDateInput.value}) 기준`;
+                }
+                
+                const options = { year: 'numeric', month: 'long', day: 'numeric' };
+                dueDateResult.textContent = `예상 출산 예정일: ${dueDate.toLocaleDateString('ko-KR', options)}`;
+                resultBox.style.display = 'block';
+            }
+
+            calculateBtn.addEventListener('click', calculateDueDate);
+
+            // Clear the other date input when one is focused/changed
+            lastPeriodDateInput.addEventListener('change', () => {
+                if (lastPeriodDateInput.value) {
+                    conceptionDateInput.value = '';
+                }
+            });
+
+            conceptionDateInput.addEventListener('change', () => {
+                if (conceptionDateInput.value) {
+                    lastPeriodDateInput.value = '';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
